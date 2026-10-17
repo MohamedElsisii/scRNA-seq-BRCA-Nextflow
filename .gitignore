@@ -1,0 +1,68 @@
+# Sequencing inputs
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+results/fastqs/
+work_local_fastqs/
+work/
+
+# Large reference files
+references/
+refdata-gex-GRCh38-*/
+*.tar.gz
+
+# Generated workflow outputs
+results/
+*.bam
+*.bai
+*.rds
+*.h5ad
+*.h5
+*.loom
+
+# Workflow and scheduler logs
+.nextflow*
+.nextflow/
+logs/
+slurm-*.out
+
+# Python and R temporary files
+__pycache__/
+*.py[cod]
+.Rhistory
+.RData
+.Rproj.user/
+
+# Environment and local machine configuration
+.env
+.env.*
+*.local
+.DS_Store
+
+# Nextflow local metadata and backups
+.nextflow/
+.nextflow*
+*.bak
+
+# Generated analysis reports and local audit artifacts
+/*_scanpy.pdf
+/*_seurat.pdf
+/*_web_summary.html
+/multiqc_final.html
+/cellranger_summary.html
+/cellranger_metrics_all_samples.tsv
+/cellranger_metrics_cleaned_from_interpretation.tsv
+/Overall interpretation_CellRanger_summary.docx
+/results_audit/
+/results_audit.zip
+
+# Historical duplicate scripts and source README
+/Scripts/
+
+# Historical source copies (preserved locally)
+/docs/original_scripts/
+/docs/README_original.docx
+
+# Editor and temporary backup files
+*.save

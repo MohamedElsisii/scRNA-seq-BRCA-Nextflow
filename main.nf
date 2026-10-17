@@ -45,6 +45,7 @@ process FASTQC {
 
 process MULTIQC_RAW {
     tag 'raw-read-qc'
+    conda "${projectDir}/envs/multiqc_env.yml"
     publishDir "${params.outdir}/multiqc/raw", mode: 'copy'
     cpus 2
     memory '4 GB'
@@ -59,22 +60,11 @@ process MULTIQC_RAW {
     script:
     """
     set -euo pipefail
-    module purge
-
-    if [[ -z "${params.conda_sh}" || ! -f "${params.conda_sh}" ]]; then
-        echo "ERROR: Set CONDA_SH to a valid Conda initialization script."
-        exit 1
-    fi
-
-    source "${params.conda_sh}"
-    conda activate "${params.multiqc_env}"
-
-    multiqc --version | grep -F "version ${params.multiqc_version}" >/dev/null || {
-        echo "ERROR: expected MultiQC ${params.multiqc_version}, but found:"
+    multiqc --version | grep -F "1.35" >/dev/null || {
+        echo "ERROR: Expected MultiQC 1.35."
         multiqc --version
         exit 1
     }
-
     multiqc --force --filename multiqc_raw.html .
     """
 }
@@ -129,6 +119,7 @@ process CELLRANGER_COUNT {
 
 process MULTIQC_FINAL {
     tag 'final-qc'
+    conda "${projectDir}/envs/multiqc_env.yml"
     publishDir "${params.outdir}/multiqc/final", mode: 'copy'
     cpus 2
     memory '8 GB'
@@ -136,7 +127,7 @@ process MULTIQC_FINAL {
 
     input:
     path fastqc_zips
-    path cellranger_metrics, stageAs: 'cellranger_metrics_*/metrics_summary.csv'
+    path cellranger_metrics, stageAs: 'cellranger_metrics_*'
 
     output:
     path 'multiqc_final.html', emit: report
@@ -144,28 +135,18 @@ process MULTIQC_FINAL {
     script:
     """
     set -euo pipefail
-    module purge
-
-    if [[ -z "${params.conda_sh}" || ! -f "${params.conda_sh}" ]]; then
-        echo "ERROR: Set CONDA_SH to a valid Conda initialization script."
-        exit 1
-    fi
-
-    source "${params.conda_sh}"
-    conda activate "${params.multiqc_env}"
-
-    multiqc --version | grep -F "version ${params.multiqc_version}" >/dev/null || {
-        echo "ERROR: expected MultiQC ${params.multiqc_version}, but found:"
+    multiqc --version | grep -F "1.35" >/dev/null || {
+        echo "ERROR: Expected MultiQC 1.35."
         multiqc --version
         exit 1
     }
-
     multiqc . --force --filename multiqc_final.html
     """
 }
 
 process SEURAT_ANALYSIS {
     tag "${sample}"
+    conda "${projectDir}/envs/seurat_env.yml"
     publishDir "${params.outdir}/seurat", mode: 'copy'
     cpus 4
     memory '16 GB'
@@ -181,12 +162,13 @@ process SEURAT_ANALYSIS {
     script:
     """
     set -euo pipefail
-    "${params.rscript}" "${projectDir}/bin/seurat_script.R" --input "${matrix}" --output "${sample}_seurat"
+    Rscript "${projectDir}/bin/seurat_script.R" --input "${matrix}" --output "${sample}_seurat"
     """
 }
 
 process SCANPY_ANALYSIS {
     tag "${sample}"
+    conda "${projectDir}/envs/scanpy_env.yml"
     publishDir "${params.outdir}/scanpy", mode: 'copy'
     cpus 4
     memory '16 GB'
@@ -202,7 +184,7 @@ process SCANPY_ANALYSIS {
     script:
     """
     set -euo pipefail
-    "${params.python}" "${projectDir}/bin/scanpy_script.py" --input "${matrix}" --output "${sample}_scanpy"
+    python "${projectDir}/bin/scanpy_script.py" --input "${matrix}" --output "${sample}_scanpy"
     """
 }
 

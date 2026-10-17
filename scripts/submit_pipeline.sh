@@ -20,11 +20,14 @@ FASTQ_DIR="${FASTQ_DIR:-${PROJECT_DIR}/results/fastqs}"
 TRANSCRIPTOME="${TRANSCRIPTOME:-${PROJECT_DIR}/references/refdata-gex-GRCh38-2024-A}"
 CONDA_SH="${CONDA_SH:-}"
 NXF_ENV="${NXF_ENV:-nxf_env}"
-MULTIQC_ENV="${MULTIQC_ENV:-multiqc_env}"
-MULTIQC_VERSION="${MULTIQC_VERSION:-1.35}"
 PIPELINE_MODE="${PIPELINE_MODE:-qc}"
 R_SCRIPT="${R_SCRIPT:-Rscript}"
 PYTHON="${PYTHON:-python}"
+
+# Resolve relative paths before Nextflow launches tasks in work directories.
+if [[ "${TRANSCRIPTOME}" != /* ]]; then
+    TRANSCRIPTOME="${PROJECT_DIR}/${TRANSCRIPTOME}"
+fi
 
 # SLURM log paths are relative to the submission directory.
 # Create the directory before submitting with sbatch.
@@ -44,13 +47,6 @@ if ! command -v nextflow >/dev/null 2>&1; then
     exit 1
 fi
 
-if ! conda run --no-capture-output -n "${MULTIQC_ENV}" \
-    multiqc --version | grep -F "version ${MULTIQC_VERSION}" >/dev/null; then
-    echo "ERROR: ${MULTIQC_ENV} must provide MultiQC ${MULTIQC_VERSION}."
-    conda run --no-capture-output -n "${MULTIQC_ENV}" multiqc --version || true
-    exit 1
-fi
-
 if [[ ! -d "${FASTQ_DIR}" ]] ||
    ! find "${FASTQ_DIR}" -maxdepth 1 -type f -name '*.fastq.gz' -print -quit | grep -q .; then
     echo "ERROR: No .fastq.gz files found in ${FASTQ_DIR}"
@@ -63,7 +59,6 @@ if [[ "${PIPELINE_MODE}" == "all" && ! -d "${TRANSCRIPTOME}" ]]; then
 fi
 
 export CONDA_SH
-export NXF_OFFLINE=true
 export NXF_DISABLE_CHECK_LATEST=true
 
 nextflow run "${PROJECT_DIR}/main.nf" \
@@ -73,7 +68,6 @@ nextflow run "${PROJECT_DIR}/main.nf" \
     --mode "${PIPELINE_MODE}" \
     --fastq_dir "${FASTQ_DIR}" \
     --transcriptome "${TRANSCRIPTOME}" \
-    --conda_sh "${CONDA_SH}" \
     --rscript "${R_SCRIPT}" \
     --python "${PYTHON}" \
     -work-dir "${PROJECT_DIR}/work_local_fastqs"

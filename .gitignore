@@ -35,6 +35,7 @@ __pycache__/
 .Rproj.user/
 
 # Environment and local machine configuration
+.conda/
 .env
 .env.*
 *.local

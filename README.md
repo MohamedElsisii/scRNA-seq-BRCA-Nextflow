@@ -344,41 +344,6 @@ stronger biological claims, including:
 
 These are future analysis steps, not results claimed by this repository.
 
-## What to share and what not to commit
-
-**Good candidates for the GitHub README or `docs/figures/`:**
-
--   A workflow diagram
--   A selected raw-read QC plot
--   A Cell Ranger metrics comparison built from actual output files
--   One clear Seurat figure and one Scanpy figure
--   A compact, de-identified summary table of verified results
-
-**Usually keep outside Git:**
-
--   Raw FASTQ files
--   Full Cell Ranger output directories and large matrices
--   Large `.rds` and `.h5ad` analysis objects
--   Private metadata and institutional paths
--   `.conda/`, Nextflow work directories, `.nextflow.log`, and SLURM
-    logs
-
-If collaborators need large result files, share them through an approved
-institutional storage location or a suitable data repository and link to
-them from the README. Confirm that the study's data-access terms permit
-sharing before uploading data or metadata.
-
-## Reproducibility checklist
-
-For each run, record:
-
--   Git commit or release tag
--   Nextflow version
--   Conda environment manifests
--   HPC module versions
--   Cell Ranger reference version
--   Input accession list
--   Execution date and command
 
 ## Repository
 

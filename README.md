@@ -322,28 +322,12 @@ cluster.
   Scanpy PDF and object               `results/scanpy/`
 
   Final MultiQC report                `results/multiqc/final/multiqc_final.html`
+  
   -----------------------------------------------------------------------------------------------
 
 The final MultiQC report currently contains the FastQC sections. Review
 per-sample Cell Ranger reports separately unless a combined Cell Ranger
 metrics report has been generated and checked.
-
-## Limitations and next steps
-
-The current workflow is intended for reproducible processing and
-per-sample exploratory analysis. Further work would be needed to make
-stronger biological claims, including:
-
--   Joint analysis and integration across all samples
--   Sample and condition labels in the combined analysis
--   Batch-effect assessment and appropriate integration, if needed
--   Cell-type annotation supported by marker genes
--   Differential-expression analysis with a design appropriate to the
-    study
--   Consistent, high-resolution figures suitable for publication
-
-These are future analysis steps, not results claimed by this repository.
-
 
 ## Repository
 

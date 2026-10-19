@@ -1,5 +1,7 @@
 # Sc-BRCA-Nextflow: A Breast Cancer Single-Cell RNA-seq Case Study
 
+<img width="2172" height="724" alt="Untitled-1 copy" src="https://github.com/user-attachments/assets/3c934be1-3c60-4371-886a-567a7f49b4a4" />
+
 A reproducible Nextflow workflow for processing 10x Genomics single-cell
 RNA-sequencing data from human breast cancer and mammary-gland samples,
 combining read-level quality control, Cell Ranger processing, and
@@ -7,29 +9,17 @@ exploratory analysis with Seurat and Scanpy.
 
 ## Case study at a glance
 
-  --------------------------------------------------------------------------------------------------------------
-  Item                                Summary
-  ----------------------------------- --------------------------------------------------------------------------
-  Biological samples processed        6
-
-  Paired-end FASTQ files              48
-
-  Data type                           10x Genomics single-cell RNA-seq
-
-  Read QC                             FastQC, MultiQC
-
-  Quantification and matrix           Cell Ranger
-  generation                          
-
-  Downstream exploratory analysis     Seurat, Scanpy
-
-  Workflow engine                     Nextflow
-
-  Compute environment                 Linux HPC / SLURM
-
-  Study accession                     [GEO:
-                                      GSE281490](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281490)
-  --------------------------------------------------------------------------------------------------------------
+| Item | Summary |
+|---|---|
+| Biological samples processed | 6 |
+| Paired-end FASTQ files | 48 |
+| Data type | 10x Genomics single-cell RNA-seq |
+| Read QC | FastQC, MultiQC |
+| Quantification and matrix generation | Cell Ranger |
+| Downstream exploratory analysis | Seurat, Scanpy |
+| Workflow engine | Nextflow |
+| Compute environment | Linux HPC / SLURM |
+| Study accession | [GEO: GSE281490](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281490) |
 
 **Case-study outcome:** The workflow was run on six biological samples
 and generated raw-read QC reports, Cell Ranger metrics and filtered
@@ -61,11 +51,6 @@ figures, and a final MultiQC report.
 
 ## Results showcase
 
-Use this section to highlight your actual outputs. Add only figures and
-values that you have verified from the completed run. The image paths
-below are placeholders: replace them with the figure files you choose to
-publish.
-
 ### 1. Read-quality assessment
 
 The raw-read QC review reported the expected 10x read layout:
@@ -79,48 +64,27 @@ High duplication in R2 was interpreted in the context of amplified
 single-cell libraries, rather than treated as automatic evidence that
 trimming or sample rejection was necessary.
 
-![Raw-read QC summary](docs/figures/raw_qc_summary.png)
-
-*Figure 1. Replace this placeholder with a figure or carefully cropped
-screenshot from the actual FastQC/MultiQC report.*
+<img width="1600" height="800" alt="fastqc_sequence_counts_plot" src="https://github.com/user-attachments/assets/83344fe8-4b8b-4488-8c9d-1f3399ad0ccc" />
 
 ### 2. Cell Ranger processing
 
 Cell Ranger was run for each of the six samples to produce per-sample
 metrics, web summaries, and filtered feature-barcode matrices.
 
-![Cell Ranger metrics across
-samples](docs/figures/cellranger_metrics.png)
+<img width="929" height="369" alt="Screenshot 2026-10-19 145332" src="https://github.com/user-attachments/assets/9d878e54-0108-49c6-a1c2-6bff4377ec27" />
 
-*Figure 2. Recommended: a comparison plot or compact table of selected
-Cell Ranger metrics across BBM0, BBM5, BSM1, hMG1, hMG2, and hMG3.
-Populate it from the actual output files; do not estimate or invent
-values.*
+### 3. Exploratory Seurat and Scanpy Analysis
 
-### 3. Exploratory Seurat and Scanpy analysis
+The current scripts generate per-sample QC, PCA, clustering, and UMAP figures, along with serialized analysis objects.
 
-The current scripts generate per-sample QC, PCA, clustering, and UMAP
-figures, along with serialized analysis objects.
+| Analysis | Figure |
+|---|---|
+| **Seurat** | ![Seurat exploratory analysis](docs/figures/seurat_example.png) |
+| **Scanpy** | ![Scanpy exploratory analysis](docs/figures/scanpy_example.png) |
 
-  --------------------------------------------------------------------------------
-  Analysis                            Figure
-  ----------------------------------- --------------------------------------------
-  Seurat                              ![Seurat exploratory
-                                      analysis](docs/figures/seurat_example.png)
+*Figures 3–4. Replace the placeholders with selected figures from the actual PDFs. Prefer clear, high-resolution plots with readable legends and axes.*
 
-  Scanpy                              ![Scanpy exploratory
-                                      analysis](docs/figures/scanpy_example.png)
-  --------------------------------------------------------------------------------
-
-*Figures 3--4. Replace the placeholders with selected figures from the
-actual PDFs. Prefer clear, high-resolution plots with readable legends
-and axes.*
-
-**Interpretation note:** Clusters with the same numeric label in
-separate per-sample analyses should not automatically be interpreted as
-the same biological cell type. UMAP and PCA are exploratory
-visualizations and do not independently establish biological differences
-or causality.
+**Interpretation note:** Clusters with the same numeric label in separate per-sample analyses should not automatically be interpreted as the same biological cell type. UMAP and PCA are exploratory visualizations and do not independently establish biological differences or causality.
 
 ### 4. Workflow outputs
 
@@ -147,19 +111,18 @@ The case study uses data associated with:
     [PRJNA1184144](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1184144)
 -   **SRA study:**
     [SRP544221](https://www.ncbi.nlm.nih.gov/sra/?term=SRP544221)
--   **Example sample:** GSM8621908 / SRX26676911 / BBM5
 
 The six biological samples processed were `BBM0`, `BBM5`, `BSM1`,
 `hMG1`, `hMG2`, and `hMG3`.
 
-  Sample   SRA runs                   Lane range
-  -------- -------------------------- ------------
-  hMG3     SRR31298425                L001
-  hMG2     SRR31298426                L001
-  hMG1     SRR31298427                L001
-  BBM5     SRR31298428--SRR31298432   L001--L005
-  BSM1     SRR31298433--SRR31298440   L001--L008
-  BBM0     SRR31298441--SRR31298448   L001--L008
+| Sample | SRA runs | Lane range |
+|---|---|---|
+| hMG3 | SRR31298425 | L001 |
+| hMG2 | SRR31298426 | L001 |
+| hMG1 | SRR31298427 | L001 |
+| BBM5 | SRR31298428–SRR31298432 | L001–L005 |
+| BSM1 | SRR31298433–SRR31298440 | L001–L008 |
+| BBM0 | SRR31298441–SRR31298448 | L001–L008 |
 
 The study was reported as private at the time of the original analysis.
 Confirm current data availability and applicable data-use conditions
@@ -221,14 +184,14 @@ in a GitHub clone.
 
 ## Software
 
-  Tool                 Role
-  -------------------- -----------------------------------
-  Nextflow             Workflow orchestration
-  FastQC 0.11.5        Read-level QC
-  MultiQC 1.35         QC report aggregation
-  Cell Ranger 10.0.0   10x Genomics processing
-  Seurat 5.3.0         R-based exploratory analysis
-  Scanpy 1.11          Python-based exploratory analysis
+| Tool | Role |
+|---|---|
+| Nextflow | Workflow orchestration |
+| FastQC 0.11.5 | Read-level QC |
+| MultiQC 1.35 | QC report aggregation |
+| Cell Ranger 10.0.0 | 10x Genomics processing |
+| Seurat 5.3.0 | R-based exploratory analysis |
+| Scanpy 1.11 | Python-based exploratory analysis |
 
 The repository contains Conda environment manifests in `envs/`. FastQC
 and Cell Ranger are configured as HPC modules; module names and resource
@@ -304,34 +267,17 @@ cluster.
 
 ## Output files
 
-  -----------------------------------------------------------------------------------------------
-  Output                              Location
-  ----------------------------------- -----------------------------------------------------------
-  FastQC reports                      `results/fastqc/`
+| Output | Location |
+|---|---|
+| FastQC reports | `results/fastqc/` |
+| Raw-read MultiQC | `results/multiqc/raw/multiqc_raw.html` |
+| Cell Ranger metrics | `results/cellranger/<sample>/metrics_summary.csv` |
+| Cell Ranger web summary | `results/cellranger/<sample>/web_summary.html` |
+| Filtered feature-barcode matrix | `results/cellranger/<sample>/filtered_feature_bc_matrix/` |
+| Seurat PDF and object | `results/seurat/` |
+| Scanpy PDF and object | `results/scanpy/` |
+| Final MultiQC report | `results/multiqc/final/multiqc_final.html` |
 
-  Raw-read MultiQC                    `results/multiqc/raw/multiqc_raw.html`
-
-  Cell Ranger metrics                 `results/cellranger/<sample>/metrics_summary.csv`
-
-  Cell Ranger web summary             `results/cellranger/<sample>/web_summary.html`
-
-  Filtered feature-barcode matrix     `results/cellranger/<sample>/filtered_feature_bc_matrix/`
-
-  Seurat PDF and object               `results/seurat/`
-
-  Scanpy PDF and object               `results/scanpy/`
-
-  Final MultiQC report                `results/multiqc/final/multiqc_final.html`
-  
-  -----------------------------------------------------------------------------------------------
-
-The final MultiQC report currently contains the FastQC sections. Review
-per-sample Cell Ranger reports separately unless a combined Cell Ranger
-metrics report has been generated and checked.
-
-## Repository
-
-[**MohamedElsisii/Sc-BRCA-Nextflow**](https://github.com/MohamedElsisii/Sc-BRCA-Nextflow)
 
 This project demonstrates a modular Nextflow workflow for single-cell
 RNA-seq processing, HPC execution, quality control, and exploratory

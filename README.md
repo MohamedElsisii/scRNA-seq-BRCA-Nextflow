@@ -75,16 +75,31 @@ metrics, web summaries, and filtered feature-barcode matrices.
 
 ### 3. Exploratory Seurat and Scanpy Analysis
 
-The current scripts generate per-sample QC, PCA, clustering, and UMAP figures, along with serialized analysis objects.
+Seurat and Scanpy were used to perform exploratory single-cell RNA-seq
+analysis independently for each biological sample. To keep this README
+concise, BBM5 is presented as a representative example.
 
-| Analysis | Figure |
-|---|---|
-| **Seurat** | ![Seurat exploratory analysis](docs/figures/seurat_example.png) |
-| **Scanpy** | ![Scanpy exploratory analysis](docs/figures/scanpy_example.png) |
+#### Seurat — BBM5
 
-*Figures 3–4. Replace the placeholders with selected figures from the actual PDFs. Prefer clear, high-resolution plots with readable legends and axes.*
+![Seurat exploratory analysis of BBM5](docs/figures/BBM5_seurat_summary.png)
 
-**Interpretation note:** Clusters with the same numeric label in separate per-sample analyses should not automatically be interpreted as the same biological cell type. UMAP and PCA are exploratory visualizations and do not independently establish biological differences or causality.
+*Figure 3. Exploratory analysis of BBM5 using Seurat. The composite
+figure summarizes selected QC, dimensionality-reduction, clustering,
+and visualization results.*
+
+#### Scanpy — BBM5
+
+![Scanpy exploratory analysis of BBM5](docs/figures/BBM5_scanpy_summary.png)
+
+*Figure 4. Exploratory analysis of BBM5 using Scanpy, showing selected
+results from the Python-based workflow.*
+
+**Interpretation note:** BBM5 is shown as a representative sample;
+the figures do not represent a joint analysis of all six samples.
+Clusters with the same numeric label across separate analyses should
+not automatically be interpreted as the same biological cell type.
+PCA and UMAP are exploratory visualizations and do not independently
+establish biological differences or causality.
 
 ### 4. Workflow outputs
 
@@ -184,14 +199,15 @@ in a GitHub clone.
 
 ## Software
 
-| Tool | Role |
-|---|---|
-| Nextflow | Workflow orchestration |
-| FastQC 0.11.5 | Read-level QC |
-| MultiQC 1.35 | QC report aggregation |
-| Cell Ranger 10.0.0 | 10x Genomics processing |
-| Seurat 5.3.0 | R-based exploratory analysis |
-| Scanpy 1.11 | Python-based exploratory analysis |
+| Tool | Role | Image |
+|---|---|---|
+| Nextflow | Workflow orchestration | <img width="613" height="123" alt="Nextflow_logo" src="https://github.com/user-attachments/assets/a0a10264-55ef-4fe3-b54e-9fef53bb431d" /> | 
+| FastQC 0.11.5 | Read-level QC | <img width="1254" height="1254" alt="FastQC Interlocking Logo" src="https://github.com/user-attachments/assets/607d6c0c-ff4b-4801-afdc-d04b32833211" /> |
+| MultiQC 1.35 | QC report aggregation | <img width="1318" height="250" alt="68747470733a2f2f6769746875622e636f6d2f4d756c746951432f4d756c746951432f7261772f6d61696e2f646f63732f696d616765732f4d756c746951435f6c6f676f2e706e67" src="https://github.com/user-attachments/assets/80d4e222-614f-41f0-ad32-fc2599d2b634" /> | 
+| Cell Ranger 10.0.0 | 10x Genomics processing | <img width="402" height="402" alt="9890104" src="https://github.com/user-attachments/assets/9ff6f395-07ca-4ca5-8a5b-86c8cc46f590" /> |
+| Seurat 5.3.0 | R-based exploratory analysis | <img width="4167" height="4164" alt="SeuratV5" src="https://github.com/user-attachments/assets/9efa68df-5718-4418-82cf-2d17ed14be54" /> | 
+| Scanpy 1.11 | Python-based exploratory analysis | <img width="1755" height="774" alt="Scanpy_Logo_RGB" src="https://github.com/user-attachments/assets/a8aaa6d0-1c8b-4bc9-a03f-eafef2dc34b7" /> |
+
 
 The repository contains Conda environment manifests in `envs/`. FastQC
 and Cell Ranger are configured as HPC modules; module names and resource

@@ -197,6 +197,7 @@ Cell Ranger count per sample
 Sc-BRCA-Nextflow/
 ├── main.nf
 ├── nextflow.config
+├── .gitignore
 ├── scripts/
 │   └── submit_pipeline.sh
 ├── bin/
@@ -206,10 +207,22 @@ Sc-BRCA-Nextflow/
 │   ├── multiqc_env.yml
 │   ├── seurat_env.yml
 │   └── scanpy_env.yml
-├── docs/
-│   └── figures/              # Selected, shareable README figures
-├── references/               # Reference data; usually not tracked in Git
-└── results/                  # Generated outputs; usually not tracked in Git
+└── results/
+    ├── BBM0_scanpy.pdf
+    ├── BBM0_seurat.pdf
+    ├── BBM5_scanpy.pdf
+    ├── BBM5_seurat.pdf
+    ├── BSM1_scanpy.pdf
+    ├── BSM1_seurat.pdf
+    ├── cellranger_metrics.tsv
+    ├── cellranger_summary.html
+    ├── hMG1_scanpy.pdf
+    ├── hMG1_seurat.pdf
+    ├── hMG2_scanpy.pdf
+    ├── hMG2_seurat.pdf
+    ├── hMG3_scanpy.pdf
+    ├── hMG3_seurat.pdf
+    └── multiqc_final.html          
 ```
 
 The reference directory, raw inputs, and generated results must be
@@ -312,3 +325,34 @@ cluster.
 | Seurat PDF and object | `results/seurat/` |
 | Scanpy PDF and object | `results/scanpy/` |
 | Final MultiQC report | `results/multiqc/final/multiqc_final.html` |
+
+---
+
+## Contributors and Affiliation
+
+This project was conducted by **Mohamed Elsisi** and **Dr. Hesham Abdullah** and belongs to **Horizon Science Communication LLC**.
+
+### Contributors
+
+**Dr. Hesham Abdullah**
+- Email: `horizonsc.us@gmail.com`
+- GitHub: [GitHub Profile](HESHAM_GITHUB_URL)
+- LinkedIn: [LinkedIn Profile]([HESHAM_LINKEDIN_URL](https://www.linkedin.com/in/hesham-abdullah-40bab1190/))
+
+  
+**Mohamed Elsisi**
+- Email: `M.Elsisi@horizon-sci-comm.us`
+- GitHub: [MohamedElsisii](https://github.com/MohamedElsisii)
+- LinkedIn: [Mohamed Elsisi](www.linkedin.com/in/mohamed-elsisii)
+
+
+### Organization
+
+**Horizon Science Communication LLC**
+[Website](https://www.horizon-sci-comm.us/) 
+
+This work is affiliated with Horizon Science Communication LLC. The project repository documents the workflow, computational methods, and exploratory analysis outputs developed for this case study.
+
+---
+
+For questions about the workflow or collaboration, please contact the contributors using the contact information above.

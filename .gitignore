@@ -13,7 +13,6 @@ refdata-gex-GRCh38-*/
 *.tar.gz
 
 # Generated workflow outputs
-results/
 *.bam
 *.bai
 *.rds

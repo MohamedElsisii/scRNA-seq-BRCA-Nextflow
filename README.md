@@ -81,18 +81,17 @@ concise, BBM5 is presented as a representative example.
 
 #### Seurat — BBM5
 
-![Seurat exploratory analysis of BBM5](docs/figures/BBM5_seurat_summary.png)
+<img width="1650" height="1275" alt="BBM5_seurat_pages-to-jpg-0004" src="https://github.com/user-attachments/assets/e1f74075-2ea0-4ecf-974c-c6e948793d51" />
+<img width="1650" height="1275" alt="BBM5_seurat_pages-to-jpg-0003" src="https://github.com/user-attachments/assets/90425b25-ec99-4295-abe2-17e8b3126b38" />
+<img width="1650" height="1275" alt="BBM5_seurat_pages-to-jpg-0002" src="https://github.com/user-attachments/assets/81ff7a41-3e64-4d90-a2fa-aaa2444e9a58" />
+<img width="1650" height="1275" alt="BBM5_seurat_pages-to-jpg-0001" src="https://github.com/user-attachments/assets/6f819b5c-cb21-4a9a-9e5d-816422a72973" />
 
-*Figure 3. Exploratory analysis of BBM5 using Seurat. The composite
-figure summarizes selected QC, dimensionality-reduction, clustering,
-and visualization results.*
 
 #### Scanpy — BBM5
 
-![Scanpy exploratory analysis of BBM5](docs/figures/BBM5_scanpy_summary.png)
+<img width="2100" height="600" alt="BBM5_scanpy_pages-to-jpg-0001" src="https://github.com/user-attachments/assets/77a3fe30-08d3-4b47-8493-f0d215d335e9" />
+<img width="1800" height="750" alt="BBM5_scanpy_pages-to-jpg-0002" src="https://github.com/user-attachments/assets/9d8750b4-ed2a-4253-b2f5-6163a6cc4db6" />
 
-*Figure 4. Exploratory analysis of BBM5 using Scanpy, showing selected
-results from the Python-based workflow.*
 
 **Interpretation note:** BBM5 is shown as a representative sample;
 the figures do not represent a joint analysis of all six samples.
@@ -293,8 +292,3 @@ cluster.
 | Seurat PDF and object | `results/seurat/` |
 | Scanpy PDF and object | `results/scanpy/` |
 | Final MultiQC report | `results/multiqc/final/multiqc_final.html` |
-
-
-This project demonstrates a modular Nextflow workflow for single-cell
-RNA-seq processing, HPC execution, quality control, and exploratory
-analysis using complementary R- and Python-based tools.

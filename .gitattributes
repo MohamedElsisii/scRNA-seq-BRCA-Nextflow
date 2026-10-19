@@ -1,2 +1,2 @@
-results/*.html linguist-vendored
-results/*.pdf linguist-generated
+results/*.html linguist-vendored=true linguist-detectable=false
+results/*.pdf linguist-generated=true

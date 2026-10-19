@@ -132,8 +132,9 @@ The completed workflow generated:
 -   Per-sample Scanpy `.h5ad` objects and PDF figures
 -   A final MultiQC report
 
-Where possible, link to or display a small, reproducible summary rather
-than uploading entire output directories to GitHub.
+Selected reports and summary metrics are included in `results/` for
+review. Large raw inputs and intermediate analysis files are excluded
+from the repository.
 
 ## Dataset
 
@@ -196,6 +197,8 @@ Cell Ranger count per sample
 ``` text
 Sc-BRCA-Nextflow/
 ├── main.nf
+├── README.md
+├── .gitattributes
 ├── nextflow.config
 ├── .gitignore
 ├── scripts/
@@ -225,9 +228,10 @@ Sc-BRCA-Nextflow/
     └── multiqc_final.html          
 ```
 
-The reference directory, raw inputs, and generated results must be
-supplied or created separately; they are not guaranteed to be included
-in a GitHub clone.
+The repository includes selected analysis reports and summary metrics
+under `results/`. Raw FASTQ files, the Cell Ranger reference genome,
+and other large intermediate outputs are not included and must be
+provided or generated separately.
 
 ## Software
 
@@ -326,6 +330,10 @@ cluster.
 | Scanpy PDF and object | `results/scanpy/` |
 | Final MultiQC report | `results/multiqc/final/multiqc_final.html` |
 
+The following paths describe the expected outputs of a full workflow run.
+The repository's `results/` directory contains the selected reports
+linked in the Results showcase section.
+
 ---
 
 ## Contributors and Affiliation
@@ -349,6 +357,9 @@ This project was conducted by **Mohamed Elsisi** and **Dr. Hesham Abdullah** and
 ### Organization
 
 **Horizon Science Communication LLC**
+
+<img width="1448" height="1086" alt="Screenshot 2026-06-21 211033" src="https://github.com/user-attachments/assets/eff03aac-180b-46c2-baac-8433ebdafdad" />
+
 [Website](https://www.horizon-sci-comm.us/) 
 
 This work is affiliated with Horizon Science Communication LLC. The project repository documents the workflow, computational methods, and exploratory analysis outputs developed for this case study.

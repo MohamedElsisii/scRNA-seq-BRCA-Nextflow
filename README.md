@@ -7,9 +7,36 @@ RNA-sequencing data from human breast cancer and mammary-gland samples,
 combining read-level quality control, Cell Ranger processing, and
 exploratory analysis with Seurat and Scanpy.
 
-## Case study at a glance
+## Research Team
 
-| Item | Summary |
+- Dr. Hesham Abdullah
+- Mohamed Elsisi
+
+## Project Background
+
+Understanding the cellular heterogeneity of metastatic breast cancer is an important challenge in cancer biology. The GEO study associated with this project investigates the cellular composition of human breast cancer metastases and the molecular programs associated with aggressive metastatic cell states.
+
+The study describes metastatic breast cancer cells as displaying a combination of gene-expression features associated with embryonic development of tubular organs and transcriptional characteristics of their original adult mammary luminal lineage. This provides the biological context for exploring gene-expression patterns at single-cell resolution.
+
+**Study accession:** [GEO: GSE281490](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281490)
+
+Additional records: [BioProject PRJNA1184144](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1184144) | [SRA SRP544221](https://www.ncbi.nlm.nih.gov/sra/?term=SRP544221)
+
+## Project Objective
+
+The objective of this project is to establish a reproducible computational workflow for processing and exploring single-cell RNA-seq data from breast cancer metastasis and mammary-gland samples.
+
+The workflow is designed to:
+
+- Validate paired-end FASTQ inputs and organize lane-specific reads by biological sample.
+- Assess raw sequencing quality using FastQC and MultiQC.
+- Process each sample with Cell Ranger to generate gene-expression matrices and quality metrics.
+- Perform per-sample exploratory analysis using Seurat and Scanpy.
+- Generate reports and visualizations to support quality assessment and downstream investigation.
+
+## Dataset Overview
+
+| Attribute | Description |
 |---|---|
 | Biological samples processed | 6 |
 | Paired-end FASTQ files | 48 |
@@ -19,12 +46,10 @@ exploratory analysis with Seurat and Scanpy.
 | Downstream exploratory analysis | Seurat, Scanpy |
 | Workflow engine | Nextflow |
 | Compute environment | Linux HPC / SLURM |
-| Study accession | [GEO: GSE281490](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281490) |
 
-**Case-study outcome:** The workflow was run on six biological samples
-and generated raw-read QC reports, Cell Ranger metrics and filtered
-feature-barcode matrices, per-sample Seurat and Scanpy objects and
-figures, and a final MultiQC report.
+The dataset includes breast cancer metastatic samples and human mammary-gland samples. The original study provides the biological context; this repository documents the computational processing and exploratory analysis performed on the six selected samples.
+
+Raw FASTQ files are not stored in this repository.
 
 > **Results scope:** The current Seurat and Scanpy scripts perform
 > exploratory analysis separately for each sample. They do not yet
@@ -33,6 +58,100 @@ figures, and a final MultiQC report.
 > highlighted here therefore focus on workflow execution, QC, and
 > generated analysis outputs rather than unsupported biological
 > discovery claims.
+
+## Why Single-Cell RNA-seq and Nextflow?
+
+### Single-cell RNA sequencing
+
+Single-cell RNA-seq enables gene-expression profiles to be examined at the individual-cell level rather than only as an aggregate across a tissue sample. This makes it suitable for exploratory investigation of cellular heterogeneity in metastatic breast cancer and comparison of expression patterns across the selected samples.
+
+### Nextflow workflow automation
+
+Processing multiple samples involves repeated quality-control, quantification, and downstream-analysis steps. Nextflow organizes these steps into a modular workflow with defined inputs, outputs, and execution dependencies.
+
+In this project, Nextflow supports:
+
+- **Workflow orchestration:** coordinates FASTQ validation, FastQC, MultiQC, Cell Ranger, and downstream analysis.
+- **Multi-sample processing:** applies the workflow to the six samples and handles lane-specific paired FASTQ inputs.
+- **Reproducibility:** keeps the computational steps and execution configuration in version-controlled workflow files.
+- **HPC execution:** supports execution through a SLURM-based compute environment.
+- **Execution management:** supports resuming eligible completed tasks when the workflow is rerun with Nextflow's resume functionality.
+
+Separate Conda environment manifests are provided for MultiQC, Seurat, and Scanpy. FastQC and Cell Ranger are configured through the target HPC environment and may require cluster-specific setup.
+
+## Workflow Overview
+
+The workflow follows this sequence:
+
+```text
+Paired-end FASTQ files
+          |
+          v
+Input validation and lane pairing
+          |
+          v
+     FastQC per sample
+          |
+          v
+    Raw-read MultiQC
+          |
+          v
+ Cell Ranger count per sample
+          |
+          v
+   +------+------+
+   |             |
+   v             v
+Seurat         Scanpy
+analysis       analysis
+   |             |
+   +------+------+
+          |
+          v
+    Final MultiQC
+```
+The workflow produces read-quality reports, Cell Ranger metrics and expression matrices, per-sample Seurat and Scanpy analysis outputs, and a final MultiQC report.
+
+## Repository structure
+
+``` text
+Sc-BRCA-Nextflow/
+├── main.nf
+├── README.md
+├── .gitattributes
+├── nextflow.config
+├── .gitignore
+├── scripts/
+│   └── submit_pipeline.sh
+├── bin/
+│   ├── seurat_script.R
+│   └── scanpy_script.py
+├── envs/
+│   ├── multiqc_env.yml
+│   ├── seurat_env.yml
+│   └── scanpy_env.yml
+└── results/
+    ├── BBM0_scanpy.pdf
+    ├── BBM0_seurat.pdf
+    ├── BBM5_scanpy.pdf
+    ├── BBM5_seurat.pdf
+    ├── BSM1_scanpy.pdf
+    ├── BSM1_seurat.pdf
+    ├── cellranger_metrics.tsv
+    ├── cellranger_summary.html
+    ├── hMG1_scanpy.pdf
+    ├── hMG1_seurat.pdf
+    ├── hMG2_scanpy.pdf
+    ├── hMG2_seurat.pdf
+    ├── hMG3_scanpy.pdf
+    ├── hMG3_seurat.pdf
+    └── multiqc_final.html          
+```
+
+The repository includes selected analysis reports and summary metrics
+under `results/`. Raw FASTQ files, the Cell Ranger reference genome,
+and other large intermediate outputs are not included and must be
+provided or generated separately.
 
 ## Highlights
 
@@ -163,75 +282,6 @@ The study was reported as private at the time of the original analysis.
 Confirm current data availability and applicable data-use conditions
 before redistributing data or metadata. Raw FASTQ files are not stored
 in this repository.
-
-## Workflow overview
-
-``` text
-Paired-end FASTQ files
-          |
-          v
-Filename validation and lane pairing
-          |
-          v
-FastQC per sample
-          |
-          v
-Raw-read MultiQC report
-          |
-          v
-Cell Ranger count per sample
-          |
-          +-------------------+
-          |                   |
-          v                   v
-    Seurat analysis      Scanpy analysis
-          |                   |
-          +---------+---------+
-                    |
-                    v
-             Final MultiQC report
-```
-
-## Repository structure
-
-``` text
-Sc-BRCA-Nextflow/
-├── main.nf
-├── README.md
-├── .gitattributes
-├── nextflow.config
-├── .gitignore
-├── scripts/
-│   └── submit_pipeline.sh
-├── bin/
-│   ├── seurat_script.R
-│   └── scanpy_script.py
-├── envs/
-│   ├── multiqc_env.yml
-│   ├── seurat_env.yml
-│   └── scanpy_env.yml
-└── results/
-    ├── BBM0_scanpy.pdf
-    ├── BBM0_seurat.pdf
-    ├── BBM5_scanpy.pdf
-    ├── BBM5_seurat.pdf
-    ├── BSM1_scanpy.pdf
-    ├── BSM1_seurat.pdf
-    ├── cellranger_metrics.tsv
-    ├── cellranger_summary.html
-    ├── hMG1_scanpy.pdf
-    ├── hMG1_seurat.pdf
-    ├── hMG2_scanpy.pdf
-    ├── hMG2_seurat.pdf
-    ├── hMG3_scanpy.pdf
-    ├── hMG3_seurat.pdf
-    └── multiqc_final.html          
-```
-
-The repository includes selected analysis reports and summary metrics
-under `results/`. Raw FASTQ files, the Cell Ranger reference genome,
-and other large intermediate outputs are not included and must be
-provided or generated separately.
 
 ## Software
 

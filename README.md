@@ -2,15 +2,14 @@
 
 <img width="2172" height="724" alt="Untitled-1 copy" src="https://github.com/user-attachments/assets/3c934be1-3c60-4371-886a-567a7f49b4a4" />
 
-A reproducible Nextflow workflow for processing 10x Genomics single-cell
-RNA-sequencing data from human breast cancer and mammary-gland samples,
-combining read-level quality control, Cell Ranger processing, and
-exploratory analysis with Seurat and Scanpy.
+An automated and reproducible Nextflow workflow for processing 10x Genomics single-cell RNA-seq data from human breast cancer metastasis and mammary-gland samples. The pipeline coordinates FASTQ validation, read-level quality control, Cell Ranger processing, and per-sample exploratory analysis using Seurat and Scanpy, with support for Linux HPC environments using SLURM.
 
 ## Research Team
 
-- Dr. Hesham Abdullah
-- Mohamed Elsisi
+**Horizon Science Communication LLC — Bioinformatics Team**
+
+- **Dr. Hesham Abdullah**
+- **Mohamed Elsisi**
 
 ## Project Background
 
@@ -241,7 +240,7 @@ Additional reports and metrics:
 
 ### 4. Workflow outputs
 
-The completed workflow generated:
+The workflow is designed to generate:
 
 -   FastQC output and a raw-read MultiQC report
 -   Cell Ranger `metrics_summary.csv` and `web_summary.html` files for
@@ -265,6 +264,8 @@ The case study uses data associated with:
     [PRJNA1184144](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1184144)
 -   **SRA study:**
     [SRP544221](https://www.ncbi.nlm.nih.gov/sra/?term=SRP544221)
+
+### Sample-to-SRA Run Mapping
 
 The six biological samples processed were `BBM0`, `BBM5`, `BSM1`,
 `hMG1`, `hMG2`, and `hMG3`.
@@ -393,16 +394,15 @@ This project was conducted by **Mohamed Elsisi** and **Dr. Hesham Abdullah** and
 ### Contributors
 
 **Dr. Hesham Abdullah**
-- Email: `horizonsc.us@gmail.com`
-- GitHub: [GitHub Profile](HESHAM_GITHUB_URL)
-- LinkedIn: [LinkedIn Profile]([HESHAM_LINKEDIN_URL](https://www.linkedin.com/in/hesham-abdullah-40bab1190/))
+- Email: `ceo@horizon-sci-comm.us`
+- GitHub: [GitHub Profile](https://github.com/HABIOTECH)
+- LinkedIn: [Dr. Hesham Abdullah](https://www.linkedin.com/in/hesham-abdullah-40bab1190/)
 
   
 **Mohamed Elsisi**
 - Email: `M.Elsisi@horizon-sci-comm.us`
 - GitHub: [MohamedElsisii](https://github.com/MohamedElsisii)
-- LinkedIn: [Mohamed Elsisi](www.linkedin.com/in/mohamed-elsisii)
-
+- LinkedIn: [Mohamed Elsisi](https://www.linkedin.com/in/mohamed-elsisii)
 
 ### Organization
 
